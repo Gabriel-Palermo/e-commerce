@@ -1,0 +1,22 @@
+import 'package:ecommerce/models/product.dart';
+import 'package:flutter/material.dart';
+
+class CartProvider extends ChangeNotifier {
+  final List<Product> _items = [];
+
+  List<Product> get items => _items;
+
+  void addItem(Product product) {
+    _items.add(product);
+    notifyListeners();
+  }
+
+  void removeItem(Product product) {
+    _items.remove(product);
+    notifyListeners();
+  }
+
+  double get totalPrice {
+    return _items.fold(0.0, (sum, item) => sum + item.price);
+  }
+}
